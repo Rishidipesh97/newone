@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Sidebar 02</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- auto submit -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){ // on document ready
+    // click the element
+            document.getElementsByClassName('numberCircle')[0].click();
+})
+
+    </script>
+
+<!--     till here -->
+
+
+    <script>
+        var arrlen = {{ le }} ;
+
+        var ans;
+
+        var ki;
+
+       var g = document.getElementById('questionNos');
+       var resp = new Array(arrlen);
+        var rate_value;
+        
+        for(var i=0;i<arrlen;i++)
+            resp[i]='e';
+        
+        function doarray() {
+           
+            var rates = document.getElementsByName('answer');
+
+            for (var i = 0; i < rates.length; i++) {
+                if (rates[i].checked) {
+                    rate_value = rates[i].value;
+                }
+            }
+            resp[indx]=rate_value;
+            for(var i=0;i<arrlen;i++)
+                console.log(resp[i]);
+
+
+             ans=resp.toString();
+             console.log("ANS");
+             console.log(ans);
+
+             console.log(x)
+
+    
+
+
+             if (indx + 1 < qlen) {
+                document.getElementsByClassName('numberCircle')[indx+ 1].click();
+            }
+        
+            
+        
+        }
+
+
+    </script>
+
+<!-- time module -->
+
+<script>
+        var month='{{ ed[1] }}';
+        var date='{{ ed[2] }}';
+        var year='{{ ed[0] }}';
+        var ta='{{ et[0] }}';
+        var tb='{{ et[1]}}';
+        var tc='{{ et[2]}}';
+        
+        
+        var countDownDate = new Date(month+' '+date+','+' '+ year+' '+ta+':'+tb+':'+tc).getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get todays date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now an the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = hours + "h " +
+                minutes + "m " + seconds + "s ";
+
+            // If the count down is finished, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "";
+                document.getElementById("modal").click();
+                alert('Time Up.  You will be soon moved to another page');
+
+                
+                
+            }
+        }, 1000);
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                <h1><a href="index.html" class="logo">Drivekraft</a></h1>
+                <div id="questionNos">
+                    <!----purely javascript approch-->
+                </div>
+                <script>
+                    qlen = {{ le }};
+                    for (i = 0; i < qlen; i++) {
+                        var dummy = document.getElementById("questionNos")
+                        var btn = document.createElement("div");
+                        btn.style.cursor = "pointer";
+                        btn.className = "numberCircle"
+                        btn.innerHTML = i + 1;
+                        dummy.appendChild(btn);
+
+                    }
+
+                </script>
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+
+       
+
+        <div id="content" class="p-4 p-md-5 pt-5">
+            <form action="../we.html" method="get">
+
+            <h2 class="mb-4" style="color:#866ec7 "></h2>
+            <!--countdown--->
+            <p id="demo" style="background-image: -moz-linear-gradient(top,#b8b0af 0%,#f2ecea 100%);
+background-image: -webkit-linear-gradient(top,#b8b0af 0%,#f2ecea 100%);
+background-image: -o-linear-gradient(top,#b8b0af 0%,#f2ecea 100%);
+background-image: -ms-linear-gradient(top,#b8b0af 0%,#f2ecea 100%);
+background-image: linear-gradient(top,#b8b0af 0%,#f2ecea 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+position:relative;font-size:1.2em;font-family: 'Yantramanav', sans-serif;font-weight:900;text-align: center;"></p>
+            <!--countdown end-->
+
+
+            <div style="border: 2px #866EC7 solid;border-radius: 20px;box-shadow: 5px 7px #c8bbed;padding: 25px;">
+                <!-- <form > -->
+                    <div class="form-row">
+                        <div class="form-group">
+
+
+                            <label for="question">
+                          <h4 id="questionlabel">Question Here</h4>
+                            </label>
+
+                            <br>
+
+                      
+                            <img style=" height: 150px; width: 150px;" id="q_img"  >
+                           
+
+                            <!-- <h2>{{ url_for('static',filename= foo)}}</h2> -->
+        
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm">
+                            <div class="custom-control custom-radio custom-control">
+                                <input type="radio" id="a" name="answer" class="custom-control-input" value="a">
+                                <label class="custom-control-label" for="a" id="alabel">Option A</label>
+
+                                <br>
+
+                            <!-- {% set foo = "ques_img/picq2.png" %} -->
+                          <!--   <img src="{{ url_for('static',filename=foo)}} "  style=" height: 150px; width: 150px" > -->
+                          <img style=" height: 150px; width: 150px" id="oa_img" >
+
+                            </div>
+                                    </div>
+
+                                    <div class="col-sm">
+
+                                        <div class="custom-control custom-radio custom-control">
+                                <input type="radio" id="b" name="answer" class="custom-control-input" value="b">
+                                <label class="custom-control-label" for="b" id="blabel">Option B</label>
+
+                                <br>
+
+                           <!--  {% set foo = "ques_img/picq2.png" %} -->
+                            <!-- <img src="{{ url_for('static',filename=foo)}} "  style=" height: 150px; width: 150px" > -->
+                            <img style=" height: 150px; width: 150px" id="ob_img" >
+
+                            </div>
+
+                                    </div>
+                                </div>
+
+
+                                 <div class="row">
+                                    <div class="col-sm">
+                                        <div class="custom-control custom-radio custom-control">
+                                <input type="radio" id="c" name="answer" class="custom-control-input" value="c">
+                                <label class="custom-control-label" for="c" id="clabel">Option C</label>
+                                <img style=" height: 150px; width: 150px" id="oc_img" >
+
+                                <br>
+
+                            <!-- {% set foo = "ques_img/picq2.png" %} -->
+                            <!-- <img src="{{ url_for('static',filename=foo)}} "  style=" height: 150px; width: 150px" > -->
+
+                            </div></div>
+                                    <div class="col-sm">
+                                     <div class="custom-control custom-radio custom-control">
+                                <input type="radio" id="d" name="answer" class="custom-control-input" value="d">
+                                <label class="custom-control-label" for="d" id="dlabel">Option D</label>
+
+
+
+                                <img style=" height: 150px; width: 150px" id="od_img" >
+
+                                <br>
+
+                            <!-- {% set foo = "ques_img/picq2.png" %} -->
+                            <!-- <img src="{{ url_for('static',filename=foo)}} "  style=" height: 150px; width: 150px" > -->
+                                
+                            </div></div>
+                                </div>
+
+                            </div>
+
+                          
+
+                            
+
+                            
+
+                           
+
+                            <script>
+                                var indx
+                                var rates = document.getElementsByName('answer');                       
+                                var g = document.getElementById('questionNos');
+
+                                 var x= new Array({{ le }});
+
+                                 var m=0;
+                                 var n=0;
+
+                                 for (var i=0;i<x.length;i++)
+                                 {
+                                    x[i]= new Array(16);
+                                 }   
+
+
+                                 {%  for i  in results %}
+
+
+                                 {%  for j in i %}
+
+
+                                  x[m][n]='{{ j }}'
+
+
+                                 n=n+1;
+
+                                 {%  endfor %}
+
+                                 m=m+1;
+                                 n=0;
+
+
+                                  {%  endfor %}
+
+
+
+                                for (var i = 0, len = g.children.length; i < len; i++) {
+
+                                    (function(index) {
+                                        g.children[i].onclick = function() {
+                                            document.getElementById("questionlabel").innerHTML = x[index][1];
+                                            document.getElementById("alabel").innerHTML =   x[index][2];
+                                            document.getElementById("blabel").innerHTML =   x[index][3];
+                                            document.getElementById("clabel").innerHTML =   x[index][4];
+                                            document.getElementById("dlabel").innerHTML =   x[index][5];
+                                            // var ki=20;
+                                            // document.getElementById("q_img").src="../static/ques_img/".concat('156','-picq',ki,'.png')  
+
+                                            // if(x[index][11] =="-1")
+                                            // {
+                                            //     document.getElementById("imggg").style.display=none;;
+                                            // }
+                                          
+                                          if(x[index][11]=='-1')
+                                          {
+                                                document.getElementById("q_img").style.display="none";
+                  
+                                          }
+                                          else
+                                          {
+                                                 document.getElementById("q_img").style.display="block";
+                                          }
+
+                                          if(x[index][12]=='-1')
+                                          {
+                                                document.getElementById("oa_img").style.display="none";
+                  
+                                          }
+                                          else
+                                          {
+                                                 document.getElementById("oa_img").style.display="block";
+                                          }
+
+                                          if(x[index][13]=='-1')
+                                          {
+                                                document.getElementById("ob_img").style.display="none";
+                  
+                                          }
+                                          else
+                                          {
+                                                 document.getElementById("ob_img").style.display="block";
+                                          }
+
+                                          if(x[index][14]=='-1')
+                                          {
+                                                document.getElementById("oc_img").style.display="none";
+                  
+                                          }
+                                          else
+                                          {
+                                                 document.getElementById("oc_img").style.display="block";
+                                          }
+
+                                          if(x[index][15]=='-1')
+                                          {
+                                                document.getElementById("od_img").style.display="none";
+                  
+                                          }
+                                          else
+                                          {
+                                                 document.getElementById("od_img").style.display="block";
+                                          }
+
+                                            document.getElementById("q_img").src = "../static/ques_img/".concat( {{ exid }},'-picq',x[index][11],'.png');
+                                            document.getElementById("oa_img").src = "../static/ques_img/".concat( {{ exid }},'-picq',x[index][12],'.png');
+                                            document.getElementById("ob_img").src = "../static/ques_img/".concat( {{ exid }},'-picq',x[index][13],'.png');
+                                            document.getElementById("oc_img").src = "../static/ques_img/".concat( {{ exid }},'-picq',x[index][14],'.png');
+                                            document.getElementById("od_img").src = "../static/ques_img/".concat( {{ exid }},'-picq',x[index][15],'.png');
+
+
+
+
+
+                                      
+
+
+                                            indx = index;
+                                            if(resp[indx]=='a')
+                                                rates[0].checked=true;
+                                            if(resp[indx]=='b')
+                                                rates[1].checked=true;
+                                            if(resp[indx]=='c')
+                                                rates[2].checked=true;
+                                            if(resp[indx]=='d')
+                                                rates[3].checked=true;
+                                            if(resp[indx]=='e')
+                                                {
+                                                    rates[0].checked=false;
+                                                    rates[1].checked=false;
+                                                    rates[2].checked=false;
+                                                    rates[3].checked=false;
+                                                }
+                                        
+                                        }
+                                        
+                                    })(i);
+
+                                }
+
+                            </script>
+                            
+                        </div>
+                    </div>
+<!--                    <input type="hidden" value="resp">-->
+<!--                   python session variable-->
+                    <input type="button" value="Submit response" class="btn btn-outline-primary"  onclick="doarray();">
+                    
+                   
+                <!-- </form> -->
+                
+
+
+
+            </div>
+
+
+             <input type="hidden" name="final"  value="swag" id="ldh_answer"  >
+
+             <script>
+                function her()
+                {
+                    document.getElementById("ldh_answer").value = ans;
+                    console.log("FKKKKKKKKKKK");
+                    console.log(ans);
+                }     
+            </script>
+
+
+             <button type="submit" id="modal" class="btn btn-outline-success" onclick="her()"  style="margin-top: 25px;margin-left: 10px">Submit Test</button>
+         </form>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

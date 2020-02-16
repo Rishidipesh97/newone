@@ -1,0 +1,92 @@
+ <!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Drivekraft</title>
+
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_teacher1.css') }}">
+    
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+<div class="ctn">
+  {% with messages =get_flashed_messages() %}
+  {%  if messages  %}
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
+    <!-- <span aria-hidden ="true">&times;</span>
+    </button> -->
+    {{ message }}  
+  </div>
+
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {% block body %}
+  {% endblock  %}
+
+<form action="../img_oa.html" method="post"  enctype="multipart/form-data" style="color: white">
+
+<input type="file"  name="picq" id="#" multiple class="btn btn-success" style="position: absolute;top: 20%;left:10%" >
+
+
+<input type="submit" name="submit" class="btn btn-light" style="position: absolute;top: 50%;left:25%" onclick="final_oa()">
+
+</form>
+
+<br/>
+
+<!-- <a href="http://themonkey.co" class="button2 b-red rot-135">Red button</a> -->
+
+</div>
+
+<div style="position: absolute;left: 40%;
+top: 80%">
+  <div class="spinner-grow text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-secondary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-danger" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-warning" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-light" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-dark" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+</div>
+
+
+<footer>
+
+
+
+</footer>
+<script>
+function final_oa() {
+  console.log("kyoo")
+  localStorage.setItem('isNeedCall_oa', 'yes');
+  // localStorage.setItem('isNeedCall_oa', 'yes');
+}
+</script>
+<!-- partial -->
+  
+</body>
+</html>

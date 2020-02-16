@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>DriveKraft</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_teacher_question_edit.css') }}">
+
+
+<script>
+    $(document).ready(function(){ // on document ready
+        // click the element
+                document.getElementsByClassName('numberCircle')[0].click();
+                
+            })
+    </script>
+    <script>
+        var arrlen = {{ le }};
+
+        var ans;
+        var ki;
+        var carry=0;
+
+
+
+        var g = document.getElementById('questionNos');
+        //var resp = new Array(arrlen);
+        var tresp = new Array(arrlen);
+        for (var i = 0; i < tresp.length; i++) {
+            tresp[i] = new Array(15);
+        }
+        var rate_value;
+        //for (var i = 0; i < arrlen; i++)
+           // resp[i] = 'e';
+        for(var i=0;i<arrlen;i++)
+            {
+                for(var j=0;j<15;j++)
+                    {
+                        tresp[i][j]='';
+                    }
+            }
+        
+
+        function do2array() {
+
+          //  var rates = document.getElementsByName('answer');
+            var qn=document.getElementById('questionnumberans');
+            var q=document.getElementById('questionans');
+            var opa=document.getElementById('optionaans');
+            var opb=document.getElementById('optionbans');
+            var opc=document.getElementById('optioncans');
+            var opd=document.getElementById('optiondans');
+            var co=document.getElementById('correctoptionans');
+            var sub=document.getElementById('subjectans');
+            var m=document.getElementById('marksans');
+            var nm=document.getElementById('negativemarksans');
+
+//            for (var i = 0; i < rates.length; i++) {
+//                if (rates[i].checked) {
+//                    rate_value = rates[i].value;
+//                }
+//            }
+//           
+            
+            tresp[indx][0]=qn.value;
+            tresp[indx][1]=q.value;
+            tresp[indx][2]=opa.value;
+            tresp[indx][3]=opb.value;
+            tresp[indx][4]=opc.value;
+            tresp[indx][5]=opd.value;
+            tresp[indx][6]=co.value;
+            tresp[indx][7]=sub.value;
+            tresp[indx][8]=m.value;
+            tresp[indx][9]=nm.value;
+                
+            
+//            //resp[indx] = rate_value;
+//            //for (var i = 0; i < arrlen; i++)
+//              //  console.log(resp[i]);
+//            for(var i=0;i<arrlen;i++)
+//                for(var j=0;j<15;j++)
+//                    console.log(tresp[i][j]);
+            
+            // ans=tresp.tostring();
+            // console.log("ANS")
+
+
+            console.log(tresp)
+
+            
+ if (indx + 1 < qlen) {
+                document.getElementsByClassName('numberCircle')[indx+ 1].click();
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                <h1><a href="index.html" class="logo">Drivekraft</a></h1>
+                <div id="questionNos">
+                    <!----purely javascript approch-->
+                </div>
+                <script>
+                    qlen = {{ le }};;
+                    for (i = 0; i < qlen; i++) {
+                        var dummy = document.getElementById("questionNos")
+                        var btn = document.createElement("div");
+                        btn.style.cursor = "pointer";
+                        btn.className = "numberCircle"
+                        btn.innerHTML = i + 1;
+                        dummy.appendChild(btn);
+
+                    }
+
+                </script>
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+
+        <div id="content" class="p-4 p-md-5 pt-5">
+
+            <h2 class="mb-4" style="color:#866ec7 ">Question</h2>
+            <form action="../es.html" method="post"  enctype="multipart/form-data">
+            <div style="border: 2px #866EC7 solid;border-radius: 20px;box-shadow: 5px 7px #c8bbed;padding: 25px;">
+
+                    <table>
+
+                        <tr>
+                            <td>
+                                <div class="group">
+                                    <input type="text" required id="questionnumberans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="questionnumber">Question Number</label>
+
+                                </div>
+                            </td>
+
+                            <td></td>
+                        </tr>
+                      <tr>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required id="questionans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="question">
+                                    Question
+                                </label>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Image
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            
+            <iframe src="ques_img.html" height=350px width=450px></iframe>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>                                
+                                </div>
+                            </td>
+                            <!-- <td><input type="file"  name="file" id="file" multiple></td> -->
+                        </tr>
+
+                        <tr>
+                            <td style="padding-right: 100px;">
+                                <div class="group ">
+                                    <input type="text" required id="optionaans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="optiona">Option A</label>
+
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+  Image
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            
+            <iframe src="oa_img.html" height=350px width=450px></iframe>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>  
+
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required  id="optionbans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="optionb">Option B</label>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+  Image
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            
+            <iframe src="ob_img.html" height=350px width=450px></iframe>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>                                    
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required  id="optioncans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="optionc">Option C</label>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3">
+  Image
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            
+            <iframe src="oc_img.html" height=350px width=450px></iframe>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>                                    
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="group">
+                                    <input type="text" required  id="optiondans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="optiond">Option D</label>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">
+  Image
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            
+            <iframe src="od_img.html" height=350px width=450px></iframe>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>                                    
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required  id="correctoptionans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="correctoption">Correct Option</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required  id="subjectans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="subject">Subject</label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required  id="marksans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="marks">Marks</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="group ">
+                                    <input type="text" required  id="negativemarksans">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label id="negativemarks">Negative Marks</label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr><td>
+                            <input type="button" value="Add Question" onclick="do2array();">
+                        </td>
+                            <td>
+                                
+                            </td>
+                            <td></td>
+                        </tr>
+
+                    </table>
+
+
+
+
+                    <!-- <div class="group">      
+      <input type="text" required value="1">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Question Number</label>
+    </div>
+      
+    <div class="group ">      
+      <input type="text" required value="3+5?">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Question</label>
+    </div>
+
+    <div class="group sub">      
+      <input type="text" required value="Maths">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Subbject</label>
+    </div> -->
+
+                    <!--<div class="group ga">      
+      <input type="text" required value="7">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Option A</label>
+    </div>
+
+     <div class="group gb">      
+      <input type="text" required value="11">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Option B</label>
+    </div>
+
+     <div class="group gc">      
+      <input type="text" required value="14">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Option C</label>
+    </div>
+
+     <div class="group gd">      
+      <input type="text" required value="8">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Option D</label>
+    </div>
+
+    <div class="group gcorr">      
+      <input type="text" required value="B">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Correct Option</label>
+    </div>
+
+    <div class="group max_marks">      
+      <input type="text" required value="4">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Marks</label>
+    </div>
+
+    <div class="group negi">      
+      <input type="text" required value="-1">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Negative Marks</label>
+    </div>
+
+  
+  <input type="submit" class=" group btn btn-info btq" value="update">
+ 
+
+
+  </form> -->
+
+                    <script>
+                        var indx
+                       
+
+
+                        var g = document.getElementById('questionNos');
+                        for (var i = 0, len = g.children.length; i < len; i++) {
+
+                            (function(index) {
+                                g.children[i].onclick = function() {
+                                    document.getElementById("questionnumber").innerHTML = "Question Number" ;
+                                    document.getElementById("question").innerHTML = "Question" ;
+                                    document.getElementById("optiona").innerHTML = "Option A" ;
+                                    document.getElementById("optionb").innerHTML = "option B" ;
+                                    document.getElementById("optionc").innerHTML = "option C" ;
+                                    document.getElementById("optiond").innerHTML = "option D" ;
+                                    document.getElementById("correctoption").innerHTML = "Correct option" ;
+                                    document.getElementById("subject").innerHTML = "Subject" ;
+                                    document.getElementById("marks").innerHTML = "Marks" ;
+                                    document.getElementById("negativemarks").innerHTML = "Negative Marks" ;
+                                    indx = index;
+                                    
+//                                    if (resp[indx] == 'a')
+//                                        rates[0].checked = true;
+//                                    if (resp[indx] == 'b')
+//                                        rates[1].checked = true;
+//                                    if (resp[indx] == 'c')
+//                                        rates[2].checked = true;
+//                                    if (resp[indx] == 'd')
+//                                        rates[3].checked = true;
+//                                    if (resp[indx] == 'e') {
+//                                        rates[0].checked = false;
+//                                        rates[1].checked = false;
+//                                        rates[2].checked = false;
+//                                        rates[3].checked = false;
+//                                    }
+                                    document.getElementById("questionnumberans").value=tresp[indx][0];
+                                    document.getElementById("questionans").value=tresp[indx][1];
+                                    document.getElementById("optionaans").value=tresp[indx][2];
+                                    document.getElementById("optionbans").value=tresp[indx][3];
+                                    document.getElementById("optioncans").value=tresp[indx][4];
+                                    document.getElementById("optiondans").value=tresp[indx][5];
+                                    document.getElementById("correctoptionans").value=tresp[indx][6];
+                                    document.getElementById("subjectans").value=tresp[indx][7];
+                                    document.getElementById("marksans").value=tresp[indx][8];
+                                    document.getElementById("negativemarksans").value=tresp[indx][9];
+                                    document.getElementById('picq').name="pic"+indx;
+                                }
+
+                            })(i);
+
+                        }
+
+                    </script>
+                   
+            </div>
+            <br/>
+
+            <input type="hidden" name="final"  value="swag" id="ldh_answer"  >
+
+              <script>
+                function her()
+                {
+                 
+                    var x,y;
+                    var sha='';
+
+                    for(x=0;x<arrlen ;x++)
+                    {
+                        for(y=0;y<15;y++)
+                        {
+                            sha=sha.concat(tresp[x][y] ,'@')
+
+                            // console.log(x,y,tresp[x][y])
+                            // console.log("F")
+
+
+
+                        }
+
+                        sha=sha.concat('//')
+                    }
+
+                    console.log("FKKKKKKKKKKK");
+                    console.log(sha);
+
+                    document.getElementById("ldh_answer").value = sha;
+
+
+
+                }    
+            </script>
+
+
+           <script>
+
+
+      setInterval(function(){
+      var isNeedCall = localStorage.getItem('isNeedCall');
+
+      if(isNeedCall == 'yes'){
+        final_ques();
+        localStorage.setItem('isNeedCall', 'no');
+      }
+    }, 500);
+
+
+     function final_ques()
+      {
+
+        console.log("heheheheh");
+
+        tresp[indx][10]=carry;
+        carry=carry+1;
+
+      } 
+
+  </script>
+
+
+<!--   image option a -->
+
+  <script >
+
+      setInterval(function(){
+      var isNeedCall_oa = localStorage.getItem('isNeedCall_oa');
+
+      if(isNeedCall_oa == 'yes'){
+        final_oa();
+        localStorage.setItem('isNeedCall_oa', 'no');
+      }
+    }, 500);
+
+
+        function final_oa()
+      {
+        console.log("yoyoyoy");
+        tresp[indx][11]=carry;
+        carry=carry+1;
+
+      }    
+    
+  </script>
+
+<!--   image option b -->
+
+  <script>
+
+      setInterval(function(){
+      var isNeedCall_ob = localStorage.getItem('isNeedCall_ob');
+
+      if(isNeedCall_ob == 'yes'){
+        final_ob();
+        localStorage.setItem('isNeedCall_ob', 'no');
+      }
+    }, 500);
+
+
+        function final_ob()
+      {
+
+        console.log("here goes B");
+
+        tresp[indx][12]=carry;
+        carry=carry+1;
+
+      }    
+    
+  </script>
+
+  <!--   image option c -->
+
+   <script>
+
+      setInterval(function(){
+      var isNeedCall_oc = localStorage.getItem('isNeedCall_oc');
+
+      if(isNeedCall_oc == 'yes'){
+        final_oc();
+        localStorage.setItem('isNeedCall_oc', 'no');
+      }
+    }, 500);
+
+
+        function final_oc()
+      {
+        console.log("CCCCC")
+        tresp[indx][13]=carry;
+        carry=carry+1;
+
+      }    
+    
+  </script>
+
+  <!--   image option d -->
+
+  <script>
+
+      setInterval(function(){
+      var isNeedCall_od = localStorage.getItem('isNeedCall_od');
+
+      if(isNeedCall_od == 'yes'){
+        final_od();
+        localStorage.setItem('isNeedCall_od', 'no');
+      }
+    }, 500);
+
+
+        function final_od()
+      {
+        console.log("almost there")
+        tresp[indx][14]=carry;
+        carry=carry+1;
+
+      }    
+    
+  </script>
+
+
+            <input type="submit" class=" group btn btn-info " value="Submit Test" onclick="her()">
+                </form>
+        </div>
+    </div>
+
+   <!--  image question -->
+    
+
+
+
+
+
+  
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
